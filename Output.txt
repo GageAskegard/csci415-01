@@ -1,0 +1,34 @@
+Script started on Sat 04 Feb 2017 09:13:38 PM CST
+]0;askegard@titan: ~/cs415/csci415-01askegard@titan:~/cs415/csci415-01$ ./Sine 
+
+CPU Run Time: 0.38173 sec
+
+GPU Memory Allocation: 0.11425 sec
+GPU Memory Copy to Device: 0.007432 sec
+GPU Kernel Run Time: 5.9e-05 sec
+GPU Memory Copy to Host: 0.01259 sec
+Total GPU Run Time: 0.13471 sec
+Result comparison passed.
+]0;askegard@titan: ~/cs415/csci415-01askegard@titan:~/cs415/csci415-01$ ./Sine 
+
+CPU Run Time: 0.38215 sec
+
+GPU Memory Allocation: 0.0962 sec
+GPU Memory Copy to Device: 0.007236 sec
+GPU Kernel Run Time: 4.5e-05 sec
+GPU Memory Copy to Host: 0.013501 sec
+Total GPU Run Time: 0.11736 sec
+Result comparison passed.
+]0;askegard@titan: ~/cs415/csci415-01askegard@titan:~/cs415/csci415-01$ ./Sine 
+
+CPU Run Time: 0.38288 sec
+
+GPU Memory Allocation: 0.094356 sec
+GPU Memory Copy to Device: 0.00691 sec
+GPU Kernel Run Time: 4.1e-05 sec
+GPU Memory Copy to Host: 0.013409 sec
+Total GPU Run Time: 0.11508 sec
+Result comparison passed.
+]0;askegard@titan: ~/cs415/csci415-01askegard@titan:~/cs415/csci415-01$ exit
+
+Script done on Sat 04 Feb 2017 09:13:59 PM CST

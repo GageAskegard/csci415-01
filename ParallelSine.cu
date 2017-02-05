@@ -47,8 +47,8 @@ void sine_serial(float *input, float *output)
 // TODO: Implement your graphics kernel here. See assignment instructions for method information
 __global__ void sine_parallel(float *input, float *output)
 {
-  int idx = threadIdx.x;
-  
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+   
   float value = input[idx];
   float number = input[idx] * input[idx] * input[idx];
   int denom = 6;
@@ -132,14 +132,16 @@ int main (int argc, char **argv)
 
   //TODO: Prepare and run your kernel, make sure to copy your results back into h_gpu_result and display your timing results
   
-  //Start timer for total run time
-  long long GPU_total_start = start_timer();
-
-  //Make PROBLEM_BYTES a constant so its easier to reference
-  const float PROBLEM_BYTES = N * sizeof(float); 
+  //Set up constants for maintainabilty
+  const float PROBLEM_BYTES = N * sizeof(float);
+  const int MAX_BLOCK_SIZE = 512;
+  const int GRID_SIZE = N/512 + 1; 
   
   //Allocate memort for host arrays
   float *h_gpu_result = (float*)malloc(PROBLEM_BYTES);
+  
+  //Start timer for total gpu time
+  long long GPU_total_start = start_timer();
 
   //Declare device arrays  
   float *d_input;
@@ -158,7 +160,7 @@ int main (int argc, char **argv)
 
   //Launch the kernel with N threads and time it
   long long GPU_kernel_start = start_timer();
-  sine_parallel<<<1, N>>>(d_input, d_output);
+  sine_parallel<<<GRID_SIZE, MAX_BLOCK_SIZE>>>(d_input, d_output);
   long long GPU_kernel_time = stop_timer(GPU_kernel_start, "GPU Kernel Run Time");
 
   //Copy the output of parallel_sine to back to the host (h_gpu_result) and time it
@@ -181,7 +183,7 @@ int main (int argc, char **argv)
       errorCount = errorCount + 1;
   }
   if (errorCount > 0)
-    printf("Result comparison failed.\nNumber of errors: %d \n", errorCount);
+    printf("Result comparison failed.\n");
   else
     printf("Result comparison passed.\n");
 
